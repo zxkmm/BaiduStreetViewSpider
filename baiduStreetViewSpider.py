@@ -98,7 +98,8 @@ def wgs2bd09mc(wgs_x, wgs_y):
 
 
 if __name__ == "__main__":
-    root = r'.\dir'
+    root = r'./testwork'
+    print(root)
     read_fn = r'point_coordinate_intersect.csv'
     error_fn = r'error_road_intersection.csv'
     dir = r'images'
@@ -106,6 +107,15 @@ if __name__ == "__main__":
 
     # 读取 csv 文件
     data = read_csv(os.path.join(root, read_fn))
+
+    print(f"Data length: {len(data)}")  # 打印 data 的长度
+    if len(data) > 0:
+        header = data[0]
+        data = data[1:]
+    else:
+        print("CSV file is empty or read failed.")
+        exit()
+
     # 记录 header
     header = data[0]
     # 去掉 header
@@ -150,7 +160,7 @@ if __name__ == "__main__":
 
             if img != None:
                 # print(os.path.join(root, dir))
-                with open(os.path.join(root, dir) + r'\%s_%s_%s_%s.png' % (wgs_x, wgs_y, headings[h], pitchs),
+                with open(os.path.join(root, dir) + r'/%s_%s_%s_%s.png' % (wgs_x, wgs_y, headings[h], pitchs),
                           "wb") as f:
                     f.write(img)
 
